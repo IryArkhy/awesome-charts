@@ -1,0 +1,50 @@
+import { useGrid } from "../../contexts/Grid/grid-context";
+import type { BlockType } from "../../types";
+import "./Toolbar.css";
+import { ToolbarButton } from "./ToolbarButton";
+
+interface ToolbarBlock {
+  type: BlockType;
+  label: string;
+  icon: string;
+}
+
+const BLOCK_TYPES: ToolbarBlock[] = [
+  {
+    type: "line-chart",
+    label: "Line Chart",
+    icon: "📈",
+  },
+  {
+    type: "bar-chart",
+    label: "Bar Chart",
+    icon: "📊",
+  },
+  {
+    type: "text",
+    label: "Text",
+    icon: "📝",
+  },
+];
+
+export function Toolbar() {
+  const { addBlock } = useGrid();
+
+  return (
+    <div className="toolbar">
+      <div className="toolbar__label">Add Widget:</div>
+      <div className="toolbar__buttons">
+        {BLOCK_TYPES.map(({ type, label, icon }) => {
+          return (
+            <ToolbarButton
+              key={type}
+              label={label}
+              icon={icon}
+              onClick={() => addBlock(type)}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}

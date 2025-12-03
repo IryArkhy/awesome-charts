@@ -39,6 +39,24 @@ export const generateBlockId = (): string => {
   return String(crypto.randomUUID());
 };
 
+export const isRowEmpty = (row: GridCell[]): boolean => {
+  return row.every((cell) => cell === null);
+};
+
+export const removeTrailingEmptyRows = (blocks: GridCell[][]): GridCell[][] => {
+  if (blocks.length === 0) {
+    return blocks;
+  }
+
+  let lastNonEmptyIndex = blocks.length - 1;
+
+  while (lastNonEmptyIndex >= 0 && isRowEmpty(blocks[lastNonEmptyIndex])) {
+    lastNonEmptyIndex--;
+  }
+
+  return blocks.slice(0, lastNonEmptyIndex + 1);
+};
+
 interface GridCapacity {
   gridWithCapacity: GridCell[][];
   emptyCell: GridPosition;

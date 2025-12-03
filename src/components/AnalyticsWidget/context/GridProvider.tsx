@@ -5,6 +5,7 @@ import {
   ensureGridCapacity,
   findFirstEmptyCell,
   initializeGrid,
+  removeTrailingEmptyRows,
 } from "../../../utils";
 import type { BlockType, Block, GridCell, GridPosition } from "../../../types";
 import { useDragAndDrop } from "../../../hooks";
@@ -33,9 +34,11 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
 
   const removeBlock = useCallback((id: string) => {
     setBlocks((currentBlocks) => {
-      return currentBlocks.map((row) =>
+      const gridAfterRemoval = currentBlocks.map((row) =>
         row.map((cell) => (cell?.id === id ? null : cell))
       );
+
+      return removeTrailingEmptyRows(gridAfterRemoval);
     });
   }, []);
 
@@ -48,7 +51,9 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
       const targetCell = currentBlocks[newPosition.row]?.[newPosition.col];
       if (targetCell !== null) return currentBlocks;
 
-      return moveBlockInGrid(currentBlocks, id, blockToMove, newPosition);
+      const gridAfterMove = moveBlockInGrid(currentBlocks, id, blockToMove, newPosition);
+
+      return removeTrailingEmptyRows(gridAfterMove);
     });
   }, []);
 

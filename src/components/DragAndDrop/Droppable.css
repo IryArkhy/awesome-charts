@@ -1,7 +1,7 @@
 .droppable {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: transparent;
+  background-color: rgba(96, 202, 35, 0.04);
   border: 2px dashed transparent;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
@@ -9,7 +9,6 @@
 
 .droppable--available {
   border-color: rgba(96, 202, 35, 0.4);
-  background-color: rgba(96, 202, 35, 0.03);
 }
 
 .droppable--over {

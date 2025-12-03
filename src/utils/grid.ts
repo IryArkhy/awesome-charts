@@ -57,6 +57,16 @@ export const removeTrailingEmptyRows = (blocks: GridCell[][]): GridCell[][] => {
   return blocks.slice(0, lastNonEmptyIndex + 1);
 };
 
+export const removeAllEmptyRows = (blocks: GridCell[][]): GridCell[][] => {
+  if (blocks.length === 0) {
+    return blocks;
+  }
+
+  const nonEmptyRows = blocks.filter((row) => !isRowEmpty(row));
+
+  return nonEmptyRows.length > 0 ? nonEmptyRows : initializeGrid(0);
+};
+
 interface GridCapacity {
   gridWithCapacity: GridCell[][];
   emptyCell: GridPosition;

@@ -7,7 +7,8 @@ export interface GridContextValue {
   addBlock: (type: BlockType) => void;
   removeBlock: (id: string) => void;
   moveBlock: (id: string, newPosition: GridPosition) => void;
-  findFirstEmptyCell: () => GridPosition | null;
+  removeEmptyRows: boolean;
+  changeRemoveEmptyRows: (value: boolean) => void;
 }
 
 export const GridContext = createContext<GridContextValue | undefined>(

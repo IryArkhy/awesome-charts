@@ -1,6 +1,7 @@
 import type { BlockType } from "../../../types";
 
 import { useGrid } from "../context";
+import { Checkbox } from "../../Checkbox";
 
 import { ToolbarButton } from "./ToolbarButton";
 import "./Toolbar.css";
@@ -30,22 +31,31 @@ const BLOCK_TYPES: ToolbarBlock[] = [
 ];
 
 export function Toolbar() {
-  const { addBlock } = useGrid();
+  const { addBlock, removeEmptyRows, changeRemoveEmptyRows } = useGrid();
 
   return (
     <div className="toolbar">
-      <div className="toolbar__label">Add Widget:</div>
-      <div className="toolbar__buttons">
-        {BLOCK_TYPES.map(({ type, label, icon }) => {
-          return (
-            <ToolbarButton
-              key={type}
-              label={label}
-              icon={icon}
-              onClick={() => addBlock(type)}
-            />
-          );
-        })}
+      <div className="toolbar__section">
+        <div className="toolbar__label">Add Widget:</div>
+        <div className="toolbar__buttons">
+          {BLOCK_TYPES.map(({ type, label, icon }) => {
+            return (
+              <ToolbarButton
+                key={type}
+                label={label}
+                icon={icon}
+                onClick={() => addBlock(type)}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <div className="toolbar__section">
+        <Checkbox
+          label="Remove empty rows"
+          checked={removeEmptyRows}
+          onChange={(e) => changeRemoveEmptyRows(e.target.checked)}
+        />
       </div>
     </div>
   );

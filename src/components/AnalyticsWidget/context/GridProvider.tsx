@@ -3,9 +3,9 @@ import { DndContext } from "@dnd-kit/core";
 
 import {
   ensureGridCapacity,
-  findFirstEmptyCell,
   initializeGrid,
   removeTrailingEmptyRows,
+  removeAllEmptyRows,
 } from "../../../utils";
 import type { BlockType, Block, GridCell, GridPosition } from "../../../types";
 import { useDragAndDrop } from "../../../hooks";
@@ -21,6 +21,7 @@ import {
 
 export const GridProvider = ({ children }: PropsWithChildren) => {
   const [blocks, setBlocks] = useState<GridCell[][]>(() => initializeGrid(0));
+  const [removeEmptyRows, setRemoveEmptyRows] = useState(false);
 
   const addBlock = useCallback((type: BlockType) => {
     setBlocks((currentBlocks) => {
@@ -32,30 +33,53 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
     });
   }, []);
 
-  const removeBlock = useCallback((id: string) => {
-    setBlocks((currentBlocks) => {
-      const gridAfterRemoval = currentBlocks.map((row) =>
-        row.map((cell) => (cell?.id === id ? null : cell))
-      );
+  const removeBlock = useCallback(
+    (id: string) => {
+      setBlocks((currentBlocks) => {
+        const gridAfterRemoval = currentBlocks.map((row) =>
+          row.map((cell) => (cell?.id === id ? null : cell))
+        );
 
-      return removeTrailingEmptyRows(gridAfterRemoval);
-    });
-  }, []);
+        return removeEmptyRows
+          ? removeAllEmptyRows(gridAfterRemoval)
+          : removeTrailingEmptyRows(gridAfterRemoval);
+      });
+    },
+    [removeEmptyRows]
+  );
 
-  const moveBlock = useCallback((id: string, newPosition: GridPosition) => {
-    setBlocks((currentBlocks) => {
-      const blockToMove = findBlockById(currentBlocks, id);
+  const moveBlock = useCallback(
+    (id: string, newPosition: GridPosition) => {
+      setBlocks((currentBlocks) => {
+        const blockToMove = findBlockById(currentBlocks, id);
 
-      if (!blockToMove) return currentBlocks;
+        if (!blockToMove) return currentBlocks;
 
-      const targetCell = currentBlocks[newPosition.row]?.[newPosition.col];
-      if (targetCell !== null) return currentBlocks;
+        const targetCell = currentBlocks[newPosition.row]?.[newPosition.col];
+        if (targetCell !== null) return currentBlocks;
 
-      const gridAfterMove = moveBlockInGrid(currentBlocks, id, blockToMove, newPosition);
+        const gridAfterMove = moveBlockInGrid(
+          currentBlocks,
+          id,
+          blockToMove,
+          newPosition
+        );
 
-      return removeTrailingEmptyRows(gridAfterMove);
-    });
-  }, []);
+        return removeEmptyRows
+          ? removeAllEmptyRows(gridAfterMove)
+          : removeTrailingEmptyRows(gridAfterMove);
+      });
+    },
+    [removeEmptyRows]
+  );
+
+  function changeRemoveEmptyRows(value: boolean) {
+    setRemoveEmptyRows(value);
+
+    if (value) {
+      setBlocks((current) => removeAllEmptyRows(current));
+    }
+  }
 
   const { sensors, handleDragStart, handleDragEnd, activeBlock } =
     useDragAndDrop({
@@ -68,7 +92,8 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
     addBlock,
     removeBlock,
     moveBlock,
-    findFirstEmptyCell: useCallback(() => findFirstEmptyCell(blocks), [blocks]),
+    removeEmptyRows,
+    changeRemoveEmptyRows,
   };
 
   return (

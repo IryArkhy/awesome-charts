@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import type { BlockType, GridCell, GridPosition } from "../../types";
+import type { BlockType, GridCell, GridPosition } from "../../../types";
 
 export interface GridContextValue {
   blocks: GridCell[][];

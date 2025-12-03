@@ -1,9 +1,10 @@
 import { useState, type PropsWithChildren } from "react";
 
-import { useGrid } from "../../contexts";
-import type { Block } from "../../types";
+import type { Block } from "../../../types";
 
-import { Draggable } from "../DnD";
+import { Draggable } from "../../DragAndDrop";
+
+import { useGrid } from "../context";
 
 import { BlockHeader } from "./BlockHeader";
 import "./BaseBlock.css";

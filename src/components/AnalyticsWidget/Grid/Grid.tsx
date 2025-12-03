@@ -1,4 +1,4 @@
-import { useGrid } from "../../contexts";
+import { useGrid } from "../context";
 
 import { GridFallback } from "./GridFallback";
 import { GridRow } from "./GridRow";

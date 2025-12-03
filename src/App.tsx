@@ -1,21 +1,17 @@
-import { Grid, Toolbar, Header } from "./components";
-import { GridProvider } from "./contexts";
+import { AnalyticsWidget, Header } from "./components";
 
 import "./App.css";
 
 function App() {
   return (
-    <GridProvider>
-      <div className="app-wrapper">
-        <div className="app">
-          <Header />
-          <main>
-            <Toolbar />
-            <Grid />
-          </main>
-        </div>
+    <div className="app-wrapper">
+      <div className="app">
+        <Header />
+        <main>
+          <AnalyticsWidget />
+        </main>
       </div>
-    </GridProvider>
+    </div>
   );
 }
 

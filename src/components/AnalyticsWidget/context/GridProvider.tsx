@@ -5,10 +5,10 @@ import {
   ensureGridCapacity,
   findFirstEmptyCell,
   initializeGrid,
-} from "../../utils";
-import type { BlockType, Block, GridCell, GridPosition } from "../../types";
-import { useDragAndDrop } from "../../hooks";
-import { DragOverlay } from "../../components";
+} from "../../../utils";
+import type { BlockType, Block, GridCell, GridPosition } from "../../../types";
+import { useDragAndDrop } from "../../../hooks";
+import { DragOverlay } from "../../DragAndDrop";
 
 import { GridContext, type GridContextValue } from "./grid-context";
 import {

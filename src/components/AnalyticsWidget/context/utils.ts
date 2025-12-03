@@ -1,6 +1,6 @@
-import type { BlockType, Block, GridPosition } from "../../types";
-import type { GridCell } from "../../types";
-import { generateBlockId } from "../../utils";
+import type { BlockType, Block, GridPosition } from "../../../types";
+import type { GridCell } from "../../../types";
+import { generateBlockId } from "../../../utils";
 
 export function generateNewBlock({
   row,

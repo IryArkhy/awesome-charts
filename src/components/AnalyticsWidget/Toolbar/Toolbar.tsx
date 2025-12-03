@@ -1,7 +1,9 @@
-import { useGrid } from "../../contexts/Grid/grid-context";
-import type { BlockType } from "../../types";
-import "./Toolbar.css";
+import type { BlockType } from "../../../types";
+
+import { useGrid } from "../context";
+
 import { ToolbarButton } from "./ToolbarButton";
+import "./Toolbar.css";
 
 interface ToolbarBlock {
   type: BlockType;

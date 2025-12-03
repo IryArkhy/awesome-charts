@@ -3,6 +3,8 @@ import { useState, type PropsWithChildren } from "react";
 import { useGrid } from "../../contexts";
 import type { Block } from "../../types";
 
+import { Draggable } from "../DnD";
+
 import { BlockHeader } from "./BlockHeader";
 import "./BaseBlock.css";
 
@@ -19,7 +21,8 @@ export const BaseBlock = ({ block, children }: BaseBlockProps) => {
   };
 
   return (
-    <div
+    <Draggable
+      id={block.id}
       className="base-block"
       data-block-id={block.id}
       onMouseEnter={() => setIsHovered(true)}
@@ -31,6 +34,6 @@ export const BaseBlock = ({ block, children }: BaseBlockProps) => {
         onDelete={handleDelete}
       />
       <div className="base-block__content">{children}</div>
-    </div>
+    </Draggable>
   );
 };

@@ -1,0 +1,28 @@
+.droppable {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background-color: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.droppable:hover {
+  border-color: var(--color-primary);
+}
+
+.droppable--over {
+  border-color: var(--color-primary);
+  background-color: rgba(96, 202, 35, 0.05);
+  border-style: solid;
+}
+
+.droppable:has(.droppable-target) {
+  border-style: solid;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.droppable:has(.droppable-target):hover {
+  border-color: transparent;
+}

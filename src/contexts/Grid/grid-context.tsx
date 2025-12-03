@@ -6,6 +6,7 @@ export interface GridContextValue {
   blocks: GridCell[][];
   addBlock: (type: BlockType) => void;
   removeBlock: (id: string) => void;
+  moveBlock: (id: string, newPosition: GridPosition) => void;
   findFirstEmptyCell: () => GridPosition | null;
 }
 

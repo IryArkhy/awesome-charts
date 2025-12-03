@@ -4,6 +4,7 @@ import type { GridCell as GridCellType } from "../../types";
 
 import { BlockRenderer } from "../BlockRenderer";
 import { LoadingSpinner } from "../LoadingSpinner";
+import { Droppable } from "../DnD/Droppable";
 
 interface GridCellProps {
   rowIndex: number;
@@ -13,14 +14,19 @@ interface GridCellProps {
 
 export const GridCell = memo(({ rowIndex, colIndex, cell }: GridCellProps) => {
   return (
-    <div className="grid__cell" data-row={rowIndex} data-col={colIndex}>
+    <Droppable
+      id={`cell-${rowIndex}-${colIndex}`}
+      disabled={cell !== null}
+      data-row={rowIndex}
+      data-col={colIndex}
+    >
       {cell && (
-        <div className="grid__block">
+        <div className="grid__block droppable-target">
           <Suspense fallback={<LoadingSpinner />}>
             <BlockRenderer block={cell} />
           </Suspense>
         </div>
       )}
-    </div>
+    </Droppable>
   );
 });

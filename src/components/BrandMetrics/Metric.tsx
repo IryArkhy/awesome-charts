@@ -5,9 +5,9 @@ interface MetricsProps {
 
 export function Metric({ label, value }: MetricsProps) {
   return (
-    <div className="text-block__metric">
-      <div className="text-block__metric-label">{label}</div>
-      <div className="text-block__metric-value">{value}</div>
+    <div className="brand-metrics__metric">
+      <div className="brand-metrics__metric-label">{label}</div>
+      <div className="brand-metrics__metric-value">{value}</div>
     </div>
   );
 }

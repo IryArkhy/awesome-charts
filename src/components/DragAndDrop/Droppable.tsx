@@ -1,5 +1,5 @@
 import { type HTMLAttributes, type PropsWithChildren } from "react";
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable, useDndContext } from "@dnd-kit/core";
 
 import "./Droppable.css";
 
@@ -21,10 +21,16 @@ export function Droppable({
     disabled,
   });
 
+  const { active } = useDndContext();
+  const isDragging = active !== null;
+  const isAvailable = isDragging && !disabled;
+
   return (
     <div
       ref={setNodeRef}
-      className={`droppable ${isOver ? "droppable--over" : ""}`}
+      className={`droppable ${isOver ? "droppable--over" : ""} ${
+        isAvailable ? "droppable--available" : ""
+      }`}
       {...props}
     >
       {children}

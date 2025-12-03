@@ -2,27 +2,23 @@
   position: relative;
   aspect-ratio: 1 / 1;
   background-color: transparent;
+  border: 2px dashed transparent;
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
 }
 
-.droppable:hover {
-  border-color: var(--color-primary);
+.droppable--available {
+  border-color: rgba(96, 202, 35, 0.4);
+  background-color: rgba(96, 202, 35, 0.03);
 }
 
 .droppable--over {
   border-color: var(--color-primary);
-  background-color: rgba(96, 202, 35, 0.05);
+  background-color: rgba(96, 202, 35, 0.1);
   border-style: solid;
-  border: 2px dashed var(--color-border);
 }
 
 .droppable:has(.droppable-target) {
-  border-style: solid;
   border-color: transparent;
   background-color: transparent;
-}
-
-.droppable:has(.droppable-target):hover {
-  border-color: transparent;
 }

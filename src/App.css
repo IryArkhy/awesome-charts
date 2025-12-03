@@ -1,3 +1,7 @@
+.app-wrapper {
+  width: 100%;
+}
+
 .app {
   max-width: 1200px;
   margin: 0 auto;

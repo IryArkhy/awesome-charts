@@ -1,0 +1,25 @@
+{
+  "primaryMetric": {
+    "label": "Total Mentions",
+    "value": "24.5K",
+    "change": {
+      "value": "+12%",
+      "trend": "positive",
+      "comparison": "vs last week"
+    }
+  },
+  "secondaryMetrics": [
+    {
+      "label": "Sentiment Score",
+      "value": "+67%"
+    },
+    {
+      "label": "Top Source",
+      "value": "Instagram"
+    },
+    {
+      "label": "Engagement Rate",
+      "value": "8.3%"
+    }
+  ]
+}

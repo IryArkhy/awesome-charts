@@ -1,0 +1,21 @@
+{
+  "title": "Sentiment by Platform",
+  "labels": ["Twitter", "Instagram", "Facebook", "TikTok"],
+  "datasets": [
+    {
+      "label": "Positive",
+      "data": [1200, 1850, 980, 1430],
+      "color": "#4caf50"
+    },
+    {
+      "label": "Neutral",
+      "data": [450, 320, 680, 290],
+      "color": "#9e9e9e"
+    },
+    {
+      "label": "Negative",
+      "data": [180, 120, 240, 95],
+      "color": "#f44336"
+    }
+  ]
+}

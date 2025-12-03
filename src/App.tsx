@@ -6,12 +6,14 @@ import "./App.css";
 function App() {
   return (
     <GridProvider>
-      <div className="app">
-        <Header />
-        <main>
-          <Toolbar />
-          <Grid />
-        </main>
+      <div className="app-wrapper">
+        <div className="app">
+          <Header />
+          <main>
+            <Toolbar />
+            <Grid />
+          </main>
+        </div>
       </div>
     </GridProvider>
   );

@@ -1,8 +1,9 @@
-import { memo } from "react";
+import { memo, Suspense } from "react";
 
 import type { GridCell as GridCellType } from "../../types";
 
-import { BlockRenderer } from "../blocks";
+import { BlockRenderer } from "../BlockRenderer";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 interface GridCellProps {
   rowIndex: number;
@@ -15,7 +16,9 @@ export const GridCell = memo(({ rowIndex, colIndex, cell }: GridCellProps) => {
     <div className="grid__cell" data-row={rowIndex} data-col={colIndex}>
       {cell && (
         <div className="grid__block">
-          <BlockRenderer block={cell} />
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlockRenderer block={cell} />
+          </Suspense>
         </div>
       )}
     </div>

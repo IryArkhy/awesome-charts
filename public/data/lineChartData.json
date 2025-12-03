@@ -1,0 +1,8 @@
+{
+  "title": "Brand Mentions Over Time",
+  "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "dataset": {
+    "label": "Brand Mentions",
+    "data": [3200, 4100, 3800, 5200, 4800, 6100, 5400]
+  }
+}

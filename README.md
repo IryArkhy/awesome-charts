@@ -47,6 +47,9 @@ npm run preview
 
 Awesome Charts lets users construct a dashboard-like grid of chart widgets. Each widget occupies a cell in the grid, and users can add, drag, and reorganize widgets while the system keeps the layout tidy by default. Additional controls in the toolbar allow more advanced behaviors such as keeping empty rows or adding new rows on demand.
 
+<img width="1018" height="705" alt="image" src="https://github.com/user-attachments/assets/00fa75e0-3a03-43f6-91cd-ba5138e7181d" />
+
+
 ### Main User Flows
 
 1. **Initial state** – the grid renders empty with no widgets.

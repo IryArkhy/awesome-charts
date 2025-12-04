@@ -35,7 +35,6 @@ export const Grid = () => {
       {grid.map((row, rowIndex) => (
         <GridRow key={rowIndex}>
           {row.map((cell, colIndex) => (
-            // TODO: min-width for the cells so they dont shrink and hide the content
             <GridCell
               cell={cell}
               rowIndex={rowIndex}

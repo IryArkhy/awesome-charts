@@ -16,8 +16,8 @@ export function BrandMetrics({ data }: BrandMetricsProps) {
         <div
           className={`brand-metrics__change brand-metrics__change--${data.primaryMetric.change.trend}`}
         >
-          {data.primaryMetric.change.trend === "positive" ? "↑" : "↓"}{" "}
-          {data.primaryMetric.change.value}{" "}
+          {data.primaryMetric.change.trend === "positive" ? "↑" : "↓"}
+          {data.primaryMetric.change.value}
           {data.primaryMetric.change.comparison}
         </div>
       </div>

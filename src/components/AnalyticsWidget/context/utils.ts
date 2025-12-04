@@ -139,7 +139,6 @@ interface GridCapacity {
 /**
  * Ensure the grid has enough rows to accommodate a new block
  */
-/**FIXME: change function name */
 export const ensureGridCapacity = (blocks: GridCell[][]): GridCapacity => {
   let gridWithCapacity = blocks;
 

@@ -1,8 +1,8 @@
 import { useDroppable, useDndContext } from "@dnd-kit/core";
 
-import "./NewRowPanel.css";
+import { NEW_ROW_DROP_ZONE_ID } from "../../constants";
 
-export const NEW_ROW_DROP_ZONE_ID = "new-row";
+import "./NewRowPanel.css";
 
 export function NewRowPanel() {
   const { active } = useDndContext();

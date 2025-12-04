@@ -1,8 +1,18 @@
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const MOCK_API_DELAY_MS = 600;
+
+export const API_URLS = {
+  GET: {
+    lineChart: "/data/lineChartData.json",
+    barChart: "/data/barChartData.json",
+    brandMetrics: "/data/brandMetrics.json",
+  },
+};
+
 async function fetchWithDelay<T>(
   url: string,
-  delayMs: number = 600
+  delayMs: number = MOCK_API_DELAY_MS
 ): Promise<T> {
   await delay(delayMs);
   const response = await fetch(url);

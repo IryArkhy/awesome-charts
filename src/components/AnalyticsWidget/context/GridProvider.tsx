@@ -2,6 +2,7 @@ import { useCallback, useMemo, useState, type PropsWithChildren } from "react";
 import { DndContext } from "@dnd-kit/core";
 
 import { DragOverlay } from "../../DragAndDrop";
+import { GRID_COLUMNS } from "../constants";
 
 import type { BlockType, Block, GridCell, GridPosition } from "../types";
 import { useDragAndDrop } from "../hooks";
@@ -82,7 +83,7 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
         const trimmedGrid = trimEmptyRows(gridAfterRemoval, autoTrimEmptyRows);
 
         const newRowIndex = trimmedGrid.length;
-        const newRow = Array(3).fill(null);
+        const newRow = Array(GRID_COLUMNS).fill(null);
         newRow[0] = { ...blockToMove, row: newRowIndex, col: 0 };
 
         return [...trimmedGrid, newRow];

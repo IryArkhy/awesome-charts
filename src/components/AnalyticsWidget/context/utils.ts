@@ -1,6 +1,5 @@
 import type { BlockType, Block, GridPosition, GridCell } from "../types";
-
-export const GRID_COLUMNS = 3;
+import { GRID_COLUMNS } from "../constants";
 
 function generateRow(): GridCell[] {
   return Array(GRID_COLUMNS).fill(null);

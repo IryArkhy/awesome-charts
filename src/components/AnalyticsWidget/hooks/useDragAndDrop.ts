@@ -9,7 +9,12 @@ import {
 } from "@dnd-kit/core";
 
 import type { Block, GridCell, GridPosition } from "../types";
-import { NEW_ROW_DROP_ZONE_ID } from "../components/NewRowPanel";
+import {
+  NEW_ROW_DROP_ZONE_ID,
+  CELL_ID_PREFIX,
+  CELL_ID_PARTS_COUNT,
+  MIN_DRAG_DISTANCE,
+} from "../constants";
 
 interface UseDragAndDropOptions {
   moveBlock: (id: string, newPosition: GridPosition) => void;
@@ -20,7 +25,7 @@ interface UseDragAndDropOptions {
 function parseCellId(cellId: string): GridPosition | null {
   const parts = cellId.split("-");
 
-  if (parts.length !== 3 || parts[0] !== "cell") {
+  if (parts.length !== CELL_ID_PARTS_COUNT || parts[0] !== CELL_ID_PREFIX) {
     return null;
   }
 
@@ -44,7 +49,7 @@ export function useDragAndDrop({
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 8,
+        distance: MIN_DRAG_DISTANCE,
       },
     }),
     useSensor(KeyboardSensor)

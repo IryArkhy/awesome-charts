@@ -1,10 +1,12 @@
 import { Fragment, memo } from "react";
 
-import type { Block } from "../../types";
+import { API_URLS } from "../../../../utils";
 
 import { LineChart, type LineChartData } from "../../../LineChart";
 import { BarChart, type BarChartData } from "../../../BarChart";
 import { BrandMetrics, type BrandMetricsData } from "../../../BrandMetrics";
+
+import type { Block } from "../../types";
 
 import { ChartWrapper } from "./ChartWrapper";
 import { DataBlock } from "./DataBlock";
@@ -35,7 +37,7 @@ export const BlockRenderer = memo(({ block }: BlockRendererProps) => {
     case "line-chart":
       return renderBlock<LineChartData>(
         block,
-        "/data/lineChartData.json",
+        API_URLS.GET.lineChart,
         LineChart,
         ChartWrapper
       );
@@ -43,7 +45,7 @@ export const BlockRenderer = memo(({ block }: BlockRendererProps) => {
     case "bar-chart":
       return renderBlock<BarChartData>(
         block,
-        "/data/barChartData.json",
+        API_URLS.GET.barChart,
         BarChart,
         ChartWrapper
       );
@@ -51,7 +53,7 @@ export const BlockRenderer = memo(({ block }: BlockRendererProps) => {
     case "text":
       return renderBlock<BrandMetricsData>(
         block,
-        "/data/textBlockData.json",
+        API_URLS.GET.brandMetrics,
         BrandMetrics
       );
 

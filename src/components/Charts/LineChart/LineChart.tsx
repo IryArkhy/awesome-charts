@@ -13,6 +13,17 @@ import {
   type ChartData,
   type ChartOptions,
 } from "chart.js";
+
+import {
+  baseChartOptions,
+  createTitleConfig,
+  baseTooltipConfig,
+  baseXAxisConfig,
+  baseYAxisConfig,
+  hiddenLegendConfig,
+  CHART_COLORS,
+} from "../chartConfig";
+
 import type { LineChartData } from "./types";
 
 ChartJS.register(
@@ -38,14 +49,14 @@ export function LineChart({ data }: LineChartProps) {
         {
           label: data.dataset.label,
           data: data.dataset.data,
-          borderColor: "#60ca23",
-          backgroundColor: "rgba(96, 202, 35, 0.1)",
+          borderColor: CHART_COLORS.primary,
+          backgroundColor: CHART_COLORS.primaryWithAlpha,
           tension: 0.4,
           fill: true,
           pointRadius: 4,
           pointHoverRadius: 6,
-          pointBackgroundColor: "#60ca23",
-          pointBorderColor: "#fff",
+          pointBackgroundColor: CHART_COLORS.primary,
+          pointBorderColor: CHART_COLORS.white,
           pointBorderWidth: 2,
         },
       ],
@@ -54,35 +65,14 @@ export function LineChart({ data }: LineChartProps) {
 
   const options: ChartOptions<"line"> = useMemo(
     () => ({
-      responsive: true,
-      maintainAspectRatio: false,
+      ...baseChartOptions,
       plugins: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: data.title,
-          align: "start" as const,
-          font: {
-            size: 14,
-            weight: 500,
-          },
-          color: "#212121",
-          padding: {
-            bottom: 16,
-          },
-        },
+        legend: hiddenLegendConfig,
+        title: createTitleConfig(data.title),
         tooltip: {
-          backgroundColor: "rgba(33, 33, 33, 0.95)",
-          padding: 12,
-          cornerRadius: 8,
-          titleFont: {
-            size: 13,
-            weight: 500,
-          },
+          ...baseTooltipConfig,
           bodyFont: {
-            size: 14,
+            ...baseTooltipConfig.bodyFont,
             weight: 600,
           },
           callbacks: {
@@ -94,35 +84,8 @@ export function LineChart({ data }: LineChartProps) {
         },
       },
       scales: {
-        x: {
-          grid: {
-            display: false,
-          },
-          ticks: {
-            color: "#757575",
-            font: {
-              size: 11,
-            },
-          },
-        },
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: "#f0f0f0",
-          },
-          ticks: {
-            color: "#757575",
-            font: {
-              size: 11,
-            },
-            callback: (value: number | string) => {
-              if (typeof value === "number") {
-                return value >= 1000 ? `${value / 1000}k` : value;
-              }
-              return value;
-            },
-          },
-        },
+        x: baseXAxisConfig,
+        y: baseYAxisConfig,
       },
     }),
     [data.title]

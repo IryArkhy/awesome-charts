@@ -30,7 +30,7 @@ const BLOCK_TYPES: ToolbarBlock[] = [
 ];
 
 export function Toolbar() {
-  const { addBlock, autoTrimEmptyRows, setAutoTrimEmptyRows } = useGrid();
+  const { addBlock, trimEmptyRows, setTrimEmptyRows } = useGrid();
 
   return (
     <div className="toolbar">
@@ -52,8 +52,8 @@ export function Toolbar() {
       <div className="toolbar__section">
         <Checkbox
           label="Remove empty rows"
-          checked={autoTrimEmptyRows}
-          onChange={(e) => setAutoTrimEmptyRows(e.target.checked)}
+          checked={trimEmptyRows}
+          onChange={(e) => setTrimEmptyRows(e.target.checked)}
         />
       </div>
     </div>

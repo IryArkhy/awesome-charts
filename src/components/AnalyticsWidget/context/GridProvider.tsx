@@ -22,9 +22,9 @@ import {
 
 export const GridProvider = ({ children }: PropsWithChildren) => {
   const [grid, setGrid] = useState<GridCell[][]>(() => initializeGrid(0));
-  const [autoTrimEmptyRows, setAutoTrimEmptyRows] = useState(false);
+  const [trimEmptyRows, setTrimEmptyRows] = useState(false);
 
-  const trimEmptyRows = (grid: GridCell[][], removeAll: boolean) =>
+  const removeEmptyRows = (grid: GridCell[][], removeAll: boolean) =>
     removeAll ? removeAllEmptyRows(grid) : removeTrailingEmptyRows(grid);
 
   const addBlock = useCallback((type: BlockType) => {
@@ -43,10 +43,10 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
       setGrid((currentGrid) => {
         const gridAfterRemoval = removeBlockById(currentGrid, id);
 
-        return trimEmptyRows(gridAfterRemoval, autoTrimEmptyRows);
+        return removeEmptyRows(gridAfterRemoval, trimEmptyRows);
       });
     },
-    [autoTrimEmptyRows]
+    [trimEmptyRows]
   );
 
   const moveBlock = useCallback(
@@ -66,10 +66,10 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
           newPosition
         );
 
-        return trimEmptyRows(gridAfterMove, autoTrimEmptyRows);
+        return removeEmptyRows(gridAfterMove, trimEmptyRows);
       });
     },
-    [autoTrimEmptyRows]
+    [trimEmptyRows]
   );
 
   const moveBlockToNewRowAtEnd = useCallback(
@@ -80,7 +80,7 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
         if (!blockToMove) return currentGrid;
 
         const gridAfterRemoval = removeBlockById(currentGrid, id);
-        const trimmedGrid = trimEmptyRows(gridAfterRemoval, autoTrimEmptyRows);
+        const trimmedGrid = removeEmptyRows(gridAfterRemoval, trimEmptyRows);
 
         const newRowIndex = trimmedGrid.length;
         const newRow = Array(GRID_COLUMNS).fill(null);
@@ -89,11 +89,11 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
         return [...trimmedGrid, newRow];
       });
     },
-    [autoTrimEmptyRows]
+    [trimEmptyRows]
   );
 
-  const handleAutoTrimToggle = useCallback((value: boolean) => {
-    setAutoTrimEmptyRows(value);
+  const handleTrimToggle = useCallback((value: boolean) => {
+    setTrimEmptyRows(value);
 
     if (value) {
       setGrid((current) => removeAllEmptyRows(current));
@@ -113,17 +113,10 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
       addBlock,
       removeBlock,
       moveBlock,
-      autoTrimEmptyRows,
-      setAutoTrimEmptyRows: handleAutoTrimToggle,
+      trimEmptyRows,
+      setTrimEmptyRows: handleTrimToggle,
     }),
-    [
-      grid,
-      addBlock,
-      removeBlock,
-      moveBlock,
-      autoTrimEmptyRows,
-      handleAutoTrimToggle,
-    ]
+    [grid, addBlock, removeBlock, moveBlock, trimEmptyRows, handleTrimToggle]
   );
 
   return (

@@ -2,8 +2,12 @@ import { Fragment, memo } from "react";
 
 import { API_URLS } from "../../../../utils";
 
-import { LineChart, type LineChartData } from "../../../LineChart";
-import { BarChart, type BarChartData } from "../../../BarChart";
+import {
+  LineChart,
+  type LineChartData,
+  BarChart,
+  type BarChartData,
+} from "../../../Charts";
 import { BrandMetrics, type BrandMetricsData } from "../../../BrandMetrics";
 
 import type { Block } from "../../types";

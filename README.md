@@ -1,6 +1,6 @@
 ## Awesome Charts
 
-An interactive React + Vite playground for composing Chart.js widgets inside a draggable grid. It demonstrates grid-aware drag-and-drop, automatic row management, and a lightweight toolbar workflow for shaping dashboards quickly.
+An interactive React + Vite playground for composing charts widgets inside a draggable grid. It demonstrates grid-aware drag-and-drop, automatic row management, and a lightweight toolbar workflow for shaping dashboards quickly.
 
 ### Stack
 

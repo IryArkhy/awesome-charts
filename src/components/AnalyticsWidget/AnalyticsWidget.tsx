@@ -1,5 +1,4 @@
-import { Grid } from "./Grid";
-import { Toolbar } from "./Toolbar";
+import { Grid, Toolbar } from "./components";
 import { GridProvider } from "./context";
 
 export function AnalyticsWidget() {

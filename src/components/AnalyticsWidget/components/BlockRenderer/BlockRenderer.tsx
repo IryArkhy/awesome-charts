@@ -1,10 +1,10 @@
 import { Fragment, memo } from "react";
 
-import type { Block } from "../../../types";
+import type { Block } from "../../types";
 
-import { LineChart, type LineChartData } from "../../LineChart";
-import { BarChart, type BarChartData } from "../../BarChart";
-import { BrandMetrics, type BrandMetricsData } from "../../BrandMetrics";
+import { LineChart, type LineChartData } from "../../../LineChart";
+import { BarChart, type BarChartData } from "../../../BarChart";
+import { BrandMetrics, type BrandMetricsData } from "../../../BrandMetrics";
 
 import { ChartWrapper } from "./ChartWrapper";
 import { DataBlock } from "./DataBlock";

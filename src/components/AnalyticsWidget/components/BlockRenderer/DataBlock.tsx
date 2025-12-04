@@ -1,7 +1,8 @@
 import { use } from "react";
 
-import { getCachedData } from "../../../utils";
-import type { Block } from "../../../types";
+import { getCachedData } from "../../../../utils";
+
+import type { Block } from "../../types";
 
 import { BaseBlock } from "../BaseBlock";
 

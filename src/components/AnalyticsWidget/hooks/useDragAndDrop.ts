@@ -9,10 +9,12 @@ import {
 } from "@dnd-kit/core";
 
 import type { Block, GridCell, GridPosition } from "../types";
+import { NEW_ROW_DROP_ZONE_ID } from "../components/NewRowPanel";
 
-interface UseDragAndDropProps {
+interface UseDragAndDropOptions {
   moveBlock: (id: string, newPosition: GridPosition) => void;
-  blocks: GridCell[][];
+  moveBlockToNewRowAtEnd: (id: string) => void;
+  grid: GridCell[][];
 }
 
 function parseCellId(cellId: string): GridPosition | null {
@@ -32,7 +34,11 @@ function parseCellId(cellId: string): GridPosition | null {
   return { row, col };
 }
 
-export function useDragAndDrop({ moveBlock, blocks }: UseDragAndDropProps) {
+export function useDragAndDrop({
+  moveBlock,
+  moveBlockToNewRowAtEnd,
+  grid,
+}: UseDragAndDropOptions) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const sensors = useSensors(
@@ -56,26 +62,33 @@ export function useDragAndDrop({ moveBlock, blocks }: UseDragAndDropProps) {
 
       if (!over) return;
 
-      const targetPosition = parseCellId(over.id as string);
+      const blockId = active.id as string;
+      const targetId = over.id as string;
 
-      if (!targetPosition) {
-        console.warn(`Invalid cell ID format: ${over.id}`);
-
+      if (targetId === NEW_ROW_DROP_ZONE_ID) {
+        moveBlockToNewRowAtEnd(blockId);
         return;
       }
 
-      moveBlock(active.id as string, targetPosition);
+      const targetPosition = parseCellId(targetId);
+
+      if (!targetPosition) {
+        console.warn(`Invalid cell ID format: ${targetId}`);
+        return;
+      }
+
+      moveBlock(blockId, targetPosition);
     },
-    [moveBlock]
+    [moveBlock, moveBlockToNewRowAtEnd]
   );
 
   const activeBlock = useMemo(() => {
     if (!activeId) return null;
 
     return (
-      blocks.flat().find((cell): cell is Block => cell?.id === activeId) ?? null
+      grid.flat().find((cell): cell is Block => cell?.id === activeId) ?? null
     );
-  }, [activeId, blocks]);
+  }, [activeId, grid]);
 
   return {
     sensors,

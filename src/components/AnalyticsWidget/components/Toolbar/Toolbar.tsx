@@ -1,7 +1,6 @@
-import type { BlockType } from "../../../types";
-
-import { useGrid } from "../context";
-import { Checkbox } from "../../Checkbox";
+import type { BlockType } from "../../types";
+import { useGrid } from "../../context";
+import { Checkbox } from "../../../Checkbox";
 
 import { ToolbarButton } from "./ToolbarButton";
 import "./Toolbar.css";
@@ -31,7 +30,7 @@ const BLOCK_TYPES: ToolbarBlock[] = [
 ];
 
 export function Toolbar() {
-  const { addBlock, removeEmptyRows, changeRemoveEmptyRows } = useGrid();
+  const { addBlock, autoTrimEmptyRows, setAutoTrimEmptyRows } = useGrid();
 
   return (
     <div className="toolbar">
@@ -53,8 +52,8 @@ export function Toolbar() {
       <div className="toolbar__section">
         <Checkbox
           label="Remove empty rows"
-          checked={removeEmptyRows}
-          onChange={(e) => changeRemoveEmptyRows(e.target.checked)}
+          checked={autoTrimEmptyRows}
+          onChange={(e) => setAutoTrimEmptyRows(e.target.checked)}
         />
       </div>
     </div>

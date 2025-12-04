@@ -1,9 +1,9 @@
 import { memo, Suspense } from "react";
 
-import type { GridCell as GridCellType } from "../../../types";
+import type { GridCell as GridCellType } from "../../types";
 
-import { LoadingSpinner } from "../../LoadingSpinner";
-import { Droppable } from "../../DragAndDrop/Droppable";
+import { LoadingSpinner } from "../../../LoadingSpinner";
+import { Droppable } from "../../../DragAndDrop/Droppable";
 
 import { BlockRenderer } from "../BlockRenderer";
 

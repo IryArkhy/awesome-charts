@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
 
-import type { BlockType, GridCell, GridPosition } from "../../../types";
+import type { BlockType, GridCell, GridPosition } from "../types";
 
 export interface GridContextValue {
-  blocks: GridCell[][];
+  grid: GridCell[][];
   addBlock: (type: BlockType) => void;
   removeBlock: (id: string) => void;
   moveBlock: (id: string, newPosition: GridPosition) => void;
-  removeEmptyRows: boolean;
-  changeRemoveEmptyRows: (value: boolean) => void;
+  autoTrimEmptyRows: boolean;
+  setAutoTrimEmptyRows: (value: boolean) => void;
 }
 
 export const GridContext = createContext<GridContextValue | undefined>(

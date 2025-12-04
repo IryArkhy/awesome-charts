@@ -24,14 +24,14 @@ async function fetchWithDelay<T>(
   return response.json();
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const promiseCache = new Map<string, Promise<any>>();
+const promiseCache = new Map<string, Promise<unknown>>();
 
 export function getCachedData<T>(url: string, delayMs?: number): Promise<T> {
   if (!promiseCache.has(url)) {
     promiseCache.set(url, fetchWithDelay<T>(url, delayMs));
   }
-  return promiseCache.get(url)!;
+
+  return promiseCache.get(url) as Promise<T>;
 }
 
 export function clearCache(url?: string) {

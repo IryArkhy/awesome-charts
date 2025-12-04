@@ -8,13 +8,14 @@ import {
   type DragEndEvent,
 } from "@dnd-kit/core";
 
-import type { Block, GridCell, GridPosition } from "../types";
+import type { GridCell, GridPosition } from "../types";
 import {
   NEW_ROW_DROP_ZONE_ID,
   CELL_ID_PREFIX,
   CELL_ID_PARTS_COUNT,
   MIN_DRAG_DISTANCE,
 } from "../constants";
+import { isBlock, isValidPosition } from "../typeGuards";
 
 interface UseDragAndDropOptions {
   moveBlock: (id: string, newPosition: GridPosition) => void;
@@ -32,11 +33,9 @@ function parseCellId(cellId: string): GridPosition | null {
   const row = parseInt(parts[1], 10);
   const col = parseInt(parts[2], 10);
 
-  if (isNaN(row) || isNaN(col)) {
-    return null;
-  }
+  const position = { row, col };
 
-  return { row, col };
+  return isValidPosition(position) ? position : null;
 }
 
 export function useDragAndDrop({
@@ -91,7 +90,10 @@ export function useDragAndDrop({
     if (!activeId) return null;
 
     return (
-      grid.flat().find((cell): cell is Block => cell?.id === activeId) ?? null
+      grid
+        .flat()
+        .filter(isBlock)
+        .find((block) => block.id === activeId) ?? null
     );
   }, [activeId, grid]);
 

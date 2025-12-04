@@ -1,5 +1,6 @@
 import type { BlockType, Block, GridPosition, GridCell } from "../types";
 import { GRID_COLUMNS } from "../constants";
+import { isBlock } from "../typeGuards";
 
 function generateRow(): GridCell[] {
   return Array(GRID_COLUMNS).fill(null);
@@ -52,7 +53,7 @@ export function findOrCreateEmptyCell(blocks: GridCell[][]): {
 export function findBlockById(grid: GridCell[][], id: string): Block | null {
   for (const row of grid) {
     for (const cell of row) {
-      if (cell?.id === id) {
+      if (isBlock(cell) && cell.id === id) {
         return cell;
       }
     }
@@ -84,11 +85,11 @@ export function isCellEmpty(
 }
 
 export function isRowEmpty(row: GridCell[]): boolean {
-  return row.every((cell) => cell === null);
+  return !row.some(isBlock);
 }
 
 export function countRowEmptyCells(row: GridCell[]): number {
-  return row.filter((cell) => cell === null).length;
+  return row.filter((cell) => !isBlock(cell)).length;
 }
 
 export function placeBlockInGrid(
@@ -111,7 +112,7 @@ export function moveBlockInGrid(
 ): GridCell[][] {
   return grid.map((row, rowIndex) =>
     row.map((cell, colIndex) => {
-      if (cell?.id === id) return null;
+      if (isBlock(cell) && cell.id === id) return null;
 
       if (rowIndex === newPosition.row && colIndex === newPosition.col) {
         return {
@@ -126,7 +127,9 @@ export function moveBlockInGrid(
 }
 
 export function removeBlockById(grid: GridCell[][], id: string): GridCell[][] {
-  return grid.map((row) => row.map((cell) => (cell?.id === id ? null : cell)));
+  return grid.map((row) =>
+    row.map((cell) => (isBlock(cell) && cell.id === id ? null : cell))
+  );
 }
 
 export function removeTrailingEmptyRows(blocks: GridCell[][]): GridCell[][] {

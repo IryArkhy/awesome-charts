@@ -3,7 +3,7 @@ import { memo, Suspense } from "react";
 import type { GridCell as GridCellType } from "../../types";
 
 import { LoadingSpinner } from "../../../LoadingSpinner";
-import { Droppable } from "../../../DragAndDrop/Droppable";
+import { Droppable } from "../../../DragAndDrop";
 
 import { BlockRenderer } from "../BlockRenderer";
 

@@ -1,0 +1,9 @@
+.draggable--dragging {
+  cursor: grabbing;
+  opacity: 0;
+}
+
+.draggable--idle {
+  cursor: grab;
+  opacity: 1;
+}

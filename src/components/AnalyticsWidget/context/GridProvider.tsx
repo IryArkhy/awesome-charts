@@ -13,7 +13,7 @@ import {
   moveBlockInGrid,
   placeBlockInGrid,
   removeBlockById,
-  ensureGridCapacity,
+  findOrCreateEmptyCell,
   initializeGrid,
   removeTrailingEmptyRows,
   removeAllEmptyRows,
@@ -28,7 +28,9 @@ export const GridProvider = ({ children }: PropsWithChildren) => {
 
   const addBlock = useCallback((type: BlockType) => {
     setGrid((currentGrid) => {
-      const { gridWithCapacity, emptyCell } = ensureGridCapacity(currentGrid);
+      const { grid: gridWithCapacity, position: emptyCell } =
+        findOrCreateEmptyCell(currentGrid);
+
       const newBlock: Block = generateNewBlock({ ...emptyCell, type });
 
       return placeBlockInGrid(gridWithCapacity, newBlock, emptyCell);

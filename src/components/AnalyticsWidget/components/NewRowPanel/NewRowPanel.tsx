@@ -20,13 +20,11 @@ export function NewRowPanel() {
   return (
     <div
       ref={setNodeRef}
-      className={`drop-zone-panel ${isOver ? "drop-zone-panel--over" : ""}`}
+      className={`new-row-panel ${isOver ? "new-row-panel--over" : ""}`}
     >
-      <div className="drop-zone-panel__content">
-        <span className="drop-zone-panel__icon">+</span>
-        <span className="drop-zone-panel__text">
-          Drop here to add to new row
-        </span>
+      <div className="new-row-panel__content">
+        <span className="new-row-panel__icon">+</span>
+        <span className="new-row-panel__text">Drop here to add to new row</span>
       </div>
     </div>
   );

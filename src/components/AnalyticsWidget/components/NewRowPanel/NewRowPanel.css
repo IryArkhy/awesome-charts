@@ -1,4 +1,4 @@
-.drop-zone-panel {
+.new-row-panel {
   margin-top: var(--spacing-lg);
   padding: var(--spacing-xl);
   border: 2px dashed rgba(96, 202, 35, 0.4);
@@ -8,13 +8,13 @@
   cursor: pointer;
 }
 
-.drop-zone-panel--over {
+.new-row-panel--over {
   border-color: var(--color-primary);
   border-style: solid;
   background-color: rgba(96, 202, 35, 0.1);
 }
 
-.drop-zone-panel__content {
+.new-row-panel__content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,15 +24,15 @@
   font-weight: 500;
 }
 
-.drop-zone-panel__icon {
+.new-row-panel__icon {
   font-size: 24px;
   font-weight: 600;
 }
 
-.drop-zone-panel__text {
+.new-row-panel__text {
   opacity: 0.8;
 }
 
-.drop-zone-panel--over .drop-zone-panel__text {
+.new-row-panel--over .new-row-panel__text {
   opacity: 1;
 }
